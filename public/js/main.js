@@ -13,6 +13,7 @@ import { SkiMode } from './skimode.js';
 import { UniverseClient } from './net.js';
 import { WorldMap } from './ui/worldmap.js';
 import { FAMOUS_RESORTS, findResort, defaultClimate } from './shared/resorts.js';
+import { apiUrl } from './config.js';
 import { dayFromYMD, ymdFromDay, universeDay } from './shared/calendar.js';
 import { SNOWCAT, BUILDINGS } from './catalog.js';
 import { money, int, escapeHtml, dist, clamp } from './util.js';
@@ -690,7 +691,7 @@ window.addEventListener('beforeunload', () => {
   if (app.game && app.universe) {
     const g = app.game;
     try {
-      fetch(`api/sites/${encodeURIComponent(g.s.siteId)}/state`, { method: 'PUT', keepalive: true, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${app.client.token}` }, body: JSON.stringify({ stats: g.statsForServer() }) });
+      fetch(apiUrl(`sites/${encodeURIComponent(g.s.siteId)}/state`), { method: 'PUT', keepalive: true, headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${app.client.token}` }, body: JSON.stringify({ stats: g.statsForServer() }) });
     } catch (e) { /* ignore */ }
   }
 });

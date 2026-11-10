@@ -3,14 +3,22 @@
 
 import { simplify, dist, polyLength } from './util.js';
 import { LIFTS } from './catalog.js';
+import { apiUrl } from './config.js';
 
 const OVERPASS = 'https://overpass-api.de/api/interpreter';
 
 export async function fetchOsm(bbox) {
   const q = `s=${bbox.s.toFixed(4)}&w=${bbox.w.toFixed(4)}&n=${bbox.n.toFixed(4)}&e=${bbox.e.toFixed(4)}`;
+  // baked file shipped with static builds (tools/build-static.mjs), named like the server cache
+  const key = [bbox.s, bbox.w, bbox.n, bbox.e].map(v => v.toFixed(4)).join('_');
   try {
-    const r = await fetch(`api/osm?${q}`);
-    if (r.ok) return await r.json();
+    const r = await fetch(`osm/${key}.json`);
+    // a host with SPA fallback answers 200 with HTML for missing files, so check the shape too
+    if (r.ok) { const d = await r.json(); if (Array.isArray(d.lifts)) return d; }
+  } catch (e) { /* not baked */ }
+  try {
+    const r = await fetch(apiUrl(`osm?${q}`));
+    if (r.ok) { const d = await r.json(); if (Array.isArray(d.lifts)) return d; }
   } catch (e) { /* fall through */ }
   // direct Overpass fallback (static hosting)
   const B = `${bbox.s},${bbox.w},${bbox.n},${bbox.e}`;

@@ -10,6 +10,7 @@ Detailed docs live in [`docs/`](docs/README.md). Read the relevant one before ch
 npm start                 # server + game on http://localhost:8787 (PORT, DAY_MINUTES, DATA_DIR, CACHE_DIR, HOST, TRUST_PROXY)
 npm run dev               # same, with node --watch on the server
 npm run warm              # pre-download terrain tiles + OSM for all 33 famous resorts (server must be running)
+npm run build:static      # dist/ for Cloudflare Pages (client + baked tiles/OSM); npm run deploy:cf publishes it
 npm run music             # synthesize promo/music.wav
 npm run trailer           # record + encode the promo trailers (needs: npm i -D puppeteer-core ffmpeg-static)
 node --check <file.js>    # quick syntax check; there is no build step, linter or test suite

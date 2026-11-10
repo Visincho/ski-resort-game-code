@@ -1,6 +1,7 @@
 // Client for the persistent online universe (see server/api.js).
 
 import { haversineKm, clamp } from './util.js';
+import { apiUrl } from './config.js';
 
 export class UniverseClient {
   constructor() {
@@ -13,7 +14,7 @@ export class UniverseClient {
   async req(method, path, body) {
     const headers = { 'Content-Type': 'application/json' };
     if (this.token) headers.Authorization = `Bearer ${this.token}`;
-    const res = await fetch(`api/${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined });
+    const res = await fetch(apiUrl(path), { method, headers, body: body ? JSON.stringify(body) : undefined });
     let data = null;
     try { data = await res.json(); } catch (e) { /* no body */ }
     if (!res.ok) {
@@ -68,7 +69,7 @@ export class UniverseClient {
   markRead(id) { return this.req('POST', `messages/${encodeURIComponent(id)}/read`, {}); }
   leaderboard() { return this.req('GET', 'leaderboard'); }
 
-  geocode(q) { return fetch(`api/geocode?q=${encodeURIComponent(q)}`).then(r => r.ok ? r.json() : []); }
+  geocode(q) { return fetch(apiUrl(`geocode?q=${encodeURIComponent(q)}`)).then(r => r.ok ? r.json() : []); }
 
   // Market share against nearby player resorts + alliance bonus
   marketShare(site, myAttract) {

@@ -4,3 +4,5 @@ data/
 *.log
 promo/frames_*/
 .env
+dist/
+.wrangler/

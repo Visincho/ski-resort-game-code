@@ -8,6 +8,7 @@
 | [rendering.md](rendering.md) | three.js scene: terrain shader, sky and lighting, layers, overlays, performance knobs |
 | [multiplayer.md](multiplayer.md) | How the online universe works: shared clock, deterministic weather, market share, alliances, competitions, trust model |
 | [server-api.md](server-api.md) | Node server reference: configuration, static files, proxies, every REST endpoint, persistence, limits |
+| [static-hosting.md](static-hosting.md) | Building `dist/` and deploying the client to Cloudflare Pages, with the universe on a VPS |
 | [ui.md](ui.md) | Screens, HUD, tools, windows, keyboard shortcuts, design tokens |
 | [i18n.md](i18n.md) | Translation system and how to keep Italian complete |
 | [promo.md](promo.md) | Trailer pipeline: director, recorder, music synthesis, encoding, social kit |

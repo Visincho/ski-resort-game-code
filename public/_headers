@@ -1,0 +1,20 @@
+# Cloudflare Pages response headers (ignored by the Node server).
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/tiles/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+/osm/*
+  Cache-Control: public, max-age=86400
+/data/*
+  Cache-Control: public, max-age=86400
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+/config.js
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
