@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Snowline · Ski Resort Tycoon</title>
+  <meta name="description" content="Build and run a ski resort on real mountains: real elevation data, real lift layouts from OpenStreetMap, weather, World Cup races and an online universe of resorts.">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M2 56L24 18l10 16 8-12 20 34z' fill='%23223a5e'/><path d='M24 18l-6 10 6-3 4 4 2-3z M42 22l-4 6 4-2 3 3z' fill='%23fff'/></svg>">
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.js", "three/addons/": "./vendor/addons/" } }
+  </script>
+</head>
+<body>
+  <div id="viewport"></div>
+  <div id="labels"></div>
+  <div id="hud" hidden></div>
+
+  <div id="menu">
+    <div class="menu-bg">
+      <svg class="ridges" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <path class="r1" d="M0 420 L120 300 L190 350 L300 210 L380 280 L470 160 L560 260 L640 220 L760 90 L860 230 L930 190 L1040 290 L1120 200 L1230 300 L1320 230 L1430 320 L1600 250 L1600 600 L0 600Z"/>
+        <path class="r1s" d="M760 90 L720 150 L760 135 L790 170 L810 150 L860 230 L800 150 Z M470 160 L440 205 L470 195 L500 215 Z M300 210 L270 255 L300 245 L330 262 Z M1120 200 L1095 240 L1125 230 L1150 250Z"/>
+        <path class="r2" d="M0 500 L160 400 L260 450 L380 360 L520 440 L640 380 L780 460 L900 370 L1030 450 L1150 390 L1290 460 L1420 400 L1600 470 L1600 600 L0 600Z"/>
+        <path class="r3" d="M0 560 L200 500 L380 540 L560 490 L760 550 L960 500 L1160 545 L1360 500 L1600 540 L1600 600 L0 600Z"/>
+      </svg>
+    </div>
+    <div class="menu-inner" id="menuInner"></div>
+  </div>
+
+  <div id="loading" hidden>
+    <div class="ld-box">
+      <div class="ld-title" id="ldTitle">Loading</div>
+      <div class="ld-bar"><i id="ldBar"></i></div>
+      <div class="ld-step" id="ldStep"></div>
+      <button class="btn ghost" id="ldSkip" hidden>Skip</button>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

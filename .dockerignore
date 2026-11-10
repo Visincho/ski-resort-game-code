@@ -1,0 +1,18 @@
+# keep the build context small: runtime data, caches and media stay out of the image
+.git
+.gitignore
+.impeccable
+node_modules
+cache
+data
+promo
+docs
+deploy
+*.log
+.env
+.env.*
+Dockerfile
+docker-compose.yml
+tools/make-music.mjs
+tools/record-trailer.mjs
+public/js/promo

@@ -1,0 +1,22 @@
+{
+  "name": "snowline",
+  "version": "0.1.0",
+  "description": "Snowline - ski resort tycoon on real mountains (solo + persistent online universe)",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "warm": "node tools/warm-cache.mjs",
+    "music": "node tools/make-music.mjs promo/music.wav",
+    "trailer": "node tools/record-trailer.mjs v it && node tools/record-trailer.mjs h it"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "puppeteer-core": "^23.0.0",
+    "ffmpeg-static": "^5.2.0"
+  }
+}

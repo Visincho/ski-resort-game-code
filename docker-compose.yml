@@ -1,0 +1,44 @@
+# Snowline with Docker Compose.
+#   docker compose up -d                     -> http://localhost:8787
+#   docker compose --profile https up -d     -> also starts Caddy with automatic HTTPS for $DOMAIN
+# Settings come from .env (see .env.example).
+name: snowline
+
+services:
+  snowline:
+    build: .
+    image: snowline:latest
+    init: true                       # forwards SIGTERM so the universe is saved on stop
+    restart: unless-stopped
+    stop_grace_period: 15s
+    ports:
+      - "${SNOWLINE_PORT:-8787}:8787"
+    environment:
+      DAY_MINUTES: ${DAY_MINUTES:-20}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+    volumes:
+      - snowline-data:/data          # accounts, resorts, saves: back this up
+      - snowline-cache:/cache        # terrain tiles + OpenStreetMap downloads (re-creatable)
+
+  caddy:
+    image: caddy:2-alpine
+    profiles: ["https"]
+    restart: unless-stopped
+    depends_on:
+      - snowline
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:-localhost}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data             # TLS certificates
+      - caddy-config:/config
+
+volumes:
+  snowline-data:
+  snowline-cache:
+  caddy-data:
+  caddy-config:

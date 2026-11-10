@@ -1,0 +1,6 @@
+# Reverse proxy with automatic HTTPS (Let's Encrypt) for the Snowline container.
+# DOMAIN comes from .env; point its DNS A/AAAA record at this machine first.
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy snowline:8787
+}
